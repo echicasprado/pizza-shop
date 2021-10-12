@@ -9,8 +9,13 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Vector;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.ListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,9 +26,15 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    
+    private DefaultTableModel TABLE_MODEL;
+    private DefaultListModel LIST_MODEL;
+    private DefaultComboBoxModel COMBOBOX_MODEL;
+    
     public Main() {
         initComponents();
         this.setIcon();
+        this.initModels();
     }
 
     /**
@@ -104,6 +115,11 @@ public class Main extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 240, 240));
         jButton1.setForeground(new java.awt.Color(243, 51, 51));
         jButton1.setText("AGREGAR ORDEN");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -167,6 +183,10 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.addPizza();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,10 +222,29 @@ public class Main extends javax.swing.JFrame {
         });
     }
     
+    public void initModels(){
+        this.LIST_MODEL = new DefaultListModel<String>();
+        this.jList1.setModel(this.LIST_MODEL);
+        
+        String pizzas[] = new String[10];
+        for(int i = 0; i < 10; i++){
+            pizzas[i] = "Pizza " + String.valueOf(i+1);
+        }
+        
+        this.COMBOBOX_MODEL = new DefaultComboBoxModel(pizzas);
+        this.jComboBox1.setModel(this.COMBOBOX_MODEL);
+    }
+    
     public void setIcon(){
         URL iconURL = getClass().getResource("../source/icon.png");
         ImageIcon icon = new ImageIcon(iconURL);
         this.setIconImage(icon.getImage());
+    }
+    
+    private void addPizza(){
+        String pizza = (String)this.jComboBox1.getSelectedItem();
+        int numberoPizza = this.LIST_MODEL.getSize() + 1;
+        this.LIST_MODEL.addElement("No. Orden " + String.valueOf(numberoPizza) + "          Tipo pizza: " + pizza);
     }
     
     
