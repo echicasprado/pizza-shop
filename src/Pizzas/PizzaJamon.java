@@ -7,7 +7,7 @@ package Pizzas;
 
 /**
  *
- * @author BDGSA
+ * @author Ever Chicas
  */
 public class PizzaJamon extends Pizza{
 

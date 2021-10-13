@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author BDGSA
+ * @author Ever Chicas
  */
 public class Pizza {
     protected String Especialidad;
